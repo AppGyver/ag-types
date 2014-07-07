@@ -1,6 +1,7 @@
 module.exports = (grunt) ->
   baseConfig = {
     dir:
+      dist: 'lib'
       src: 'src'
       tasks: 'tasks'
       test: 'test'
