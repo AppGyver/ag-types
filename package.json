@@ -1,0 +1,24 @@
+{
+  "name": "ag-types",
+  "version": "0.0.0",
+  "description": "Arbitrary data structure validation",
+  "main": "lib/ag/types.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AppGyver/ag-types.git"
+  },
+  "keywords": [
+    "validate",
+    "validator",
+    "type"
+  ],
+  "author": "Eevert Saukkokoski <eevert.saukkokoski@appgyver.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AppGyver/ag-types/issues"
+  },
+  "homepage": "https://github.com/AppGyver/ag-types"
+}
