@@ -31,6 +31,8 @@
     "load-grunt-tasks": "^0.6.0"
   },
   "dependencies": {
-    "coffee-script": "^1.7.1"
+    "coffee-script": "^1.7.1",
+    "data.validation": "^1.2.0",
+    "lodash": "^2.4.1"
   }
 }
