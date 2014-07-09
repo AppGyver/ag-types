@@ -41,18 +41,20 @@ objectWithProperty = (name) -> (value) ->
   object[name] = value
   object
 
-nativeTypeValidator = (type) -> (input) ->
-  if typeof input is type
-    Success input
-  else
-    Failure ["Input was not of type #{type}"]
-
+getType = (input) -> Object::toString.call(input).match(/\[object ([^\]]+)\]/)[1].toLowerCase()
 isArray = (input) -> (Object::toString.call input) is '[object Array]'
 isObject = (input) -> (Object::toString.call input) is '[object Object]'
 
+nativeTypeValidator = (expectedType) -> (input) ->
+  actualType = getType input
+  if expectedType is actualType
+    Success input
+  else
+    Failure ["Input was of type #{actualType} instead of #{expectedType}"]
+
 assertFunction = (input) ->
   unless typeof input is 'function'
-    throw new Error "Type constructor argument was of type '#{typeof input}', function expected"
+    throw new Error "Type constructor argument was of type '#{getType input}', function expected"
 
 module.exports = types =
   Any: (input) ->
@@ -105,21 +107,21 @@ module.exports = types =
 
   List: (type) ->
     assertFunction type
-    (list) ->
-      if not isArray list
-        Failure ['Input was not an array']
+    (input) ->
+      if not isArray input
+        Failure ["Input was of type #{getType input} instead of array"]
       else
-        listSequence (type(value) for value in list)
+        listSequence (type(value) for value in input)
 
   Map: (type) ->
     assertFunction type
-    (object) ->
-      if not isObject object
-        Failure ['Input was not an object']
+    (input) ->
+      if not isObject input
+        Failure ["Input was of type #{getType input} instead of object"]
       else
         objectSequence (
-          pairs mapValues object, (_, propertyName) ->
-            types.Property(propertyName, type)(object)
+          pairs mapValues input, (_, propertyName) ->
+            types.Property(propertyName, type)(input)
         )
     
   Optional: (type) ->
