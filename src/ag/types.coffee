@@ -1,4 +1,4 @@
-{pairs, map, mapValues} = require 'lodash'
+{pairs, object, map, mapValues} = require 'lodash'
 {Success, Failure} = require 'data.validation'
 
 # List [String, Validation] -> Validation Object
@@ -6,7 +6,9 @@ objectSequence = (nameValidationPairs) ->
   failures = []
   result = for [name, validation] in nameValidationPairs
     validation.fold(
-      (failure) -> failures.push failure; [name, null]
+      (failure) ->
+        failures = failures.concat failure
+        [name, null]
       (success) -> [name, success]
     )
 
@@ -25,9 +27,11 @@ pairsToObject = (pairs) ->
 # List Validation -> Validation List
 listSequence = (list) ->
   failures = []
-  result = for validation in list
+  result = for validation, index in list
     validation.fold(
-      (failure) -> failures.push failure; null
+      (failure) ->
+        failures = failures.concat objectWithProperty(index)(failure)
+        null
       (success) -> success
     )
   if failures.length > 0
