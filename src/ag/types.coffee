@@ -50,6 +50,10 @@ nativeTypeValidator = (type) -> (input) ->
 isArray = (input) -> (Object::toString.call input) is '[object Array]'
 isObject = (input) -> (Object::toString.call input) is '[object Object]'
 
+assertFunction = (input) ->
+  unless typeof input is 'function'
+    throw new Error "Type constructor argument was of type '#{typeof input}', function expected"
+
 module.exports = types =
   Any: (input) ->
     if input?
@@ -57,7 +61,10 @@ module.exports = types =
     else
       Failure ["Input was undefined"]
 
-  OneOf: (types) -> (input) ->
+  OneOf: (types) ->
+    for type in types
+      assertFunction type
+    (input) ->
     fail = Failure []
     for type in types
       validation = type(input)
@@ -73,18 +80,21 @@ module.exports = types =
 
   Number: nativeTypeValidator 'number'
 
-  Property: (name, type = types.Any) -> (object) ->
-    (if object?[name]?
-      type object[name]
-    else
-      type null
-    ).leftMap (errors) ->
-      result = {}
-      result[name] = errors
-      result
+  Property: (name, type = types.Any) ->
+    assertFunction type
+    (object) ->
+      (if object?[name]?
+        type object[name]
+      else
+        type null
+      ).leftMap (errors) ->
+        result = {}
+        result[name] = errors
+        result
 
   Object: (memberTypes) ->
     propertyNamesToTypes = mapValues memberTypes, (type, name) ->
+      assertFunction type
       types.Property(name, type)
 
     (object) ->
@@ -93,28 +103,36 @@ module.exports = types =
           propertyType(object)
       )
 
-  List: (type) -> (list) ->
-    if not isArray list
-      Failure ['Input was not an array']
-    else
-      listSequence (type(value) for value in list)
+  List: (type) ->
+    assertFunction type
+    (list) ->
+      if not isArray list
+        Failure ['Input was not an array']
+      else
+        listSequence (type(value) for value in list)
 
-  Map: (type) -> (object) ->
-    if not isObject object
-      Failure ['Input was not an object']
-    else
-      objectSequence (
-        pairs mapValues object, (_, propertyName) ->
-          types.Property(propertyName, type)(object)
-      )
-  
-  Optional: (type) -> (input) ->
-    if input?
-      type(input)
-    else
-      Success null
+  Map: (type) ->
+    assertFunction type
+    (object) ->
+      if not isObject object
+        Failure ['Input was not an object']
+      else
+        objectSequence (
+          pairs mapValues object, (_, propertyName) ->
+            types.Property(propertyName, type)(object)
+        )
+    
+  Optional: (type) ->
+    assertFunction type
+    (input) ->
+      if input?
+        type(input)
+      else
+        Success null
 
   projections:
-    Property: (name, type = types.Any) -> (value) ->
-      type(value).map(objectWithProperty name)
+    Property: (name, type = types.Any) ->
+      assertFunction type
+      (value) ->
+        type(value).map(objectWithProperty name)
 
