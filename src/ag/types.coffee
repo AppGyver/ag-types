@@ -136,3 +136,11 @@ module.exports = types =
       (value) ->
         type(value).map(objectWithProperty name)
 
+  recursive: (typeProvider) ->
+    type = null
+    (input) ->
+      if !type?
+        type = typeProvider()
+        assertFunction type
+      type input
+

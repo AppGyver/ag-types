@@ -167,5 +167,13 @@ describe "Typing data with steroids.data.types", ->
         notAProjectedString = projectToStringProperty totallyNotAString
         notAProjectedString.isFailure.should.be.true
 
+  it 'Should be able to define recursive composite types', ->
+    listType = types.Object
+      head: types.Any
+      tail: types.Optional types.recursive -> listType
 
+    for looksLikeAList in [{ head: "foo"}, { head: "foo", tail: { head: "bar"}}]
+      listType(looksLikeAList).isSuccess.should.be.true
 
+    for notAListAtAll in [{ head: "foo", tail: "lol" }, { head: "foo", tail: { head: "bar", tail: "lol" }}]
+      listType(notAListAtAll).isFailure.should.be.true
