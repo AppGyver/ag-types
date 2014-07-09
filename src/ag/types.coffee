@@ -65,14 +65,14 @@ module.exports = types =
     for type in types
       assertFunction type
     (input) ->
-    fail = Failure []
-    for type in types
-      validation = type(input)
-      if validation.isSuccess
-        return validation
-      else
-        fail = fail.ap validation
-    fail
+      fail = Failure []
+      for type in types
+        validation = type(input)
+        if validation.isSuccess
+          return validation
+        else
+          fail = fail.ap validation
+      fail
 
   String: nativeTypeValidator 'string'
 
