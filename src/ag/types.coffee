@@ -124,7 +124,7 @@ module.exports = types =
         Failure ["Input was of type #{getType input} instead of object"]
       else
         objectSequence (
-          pairs mapValues input, (_, propertyName) ->
+          pairs mapValues input, (throwawayValue, propertyName) ->
             types.Property(propertyName, type)(input)
         )
     
