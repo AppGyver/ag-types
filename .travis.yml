@@ -8,6 +8,6 @@ deploy:
   api_key:
     secure: Ob3FZO+u9OHQ3SjJRDO17VucE232Odl3VsIOAXCDFdTMwMCS1rlGkYR0aJgD7X8zl1EPCyuXX3mFS3CA0DmvGB3UWUISh8w3nQxWgtHnQfCNOxVw6xnRvU5AMxH351fCJpDH3afz1dzlKTghNUMLkoSwJ+gcUO1ZjSbeVPWViVs=
   on:
-    branch: master
     tags: true
+    all_branches: true
     repo: AppGyver/ag-types
