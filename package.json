@@ -38,5 +38,12 @@
   "dependencies": {
     "data.validation": "^1.2.0",
     "lodash": "^2.4.1"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "src",
+      "data-cover-never": "node_modules",
+      "loader": "./node-loaders/coffee-script"
+    }
   }
 }
