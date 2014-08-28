@@ -1,4 +1,7 @@
-{pairs, object, map, mapValues} = require 'lodash'
+pairs = require 'lodash-node/modern/objects/pairs'
+zipObject = require 'lodash-node/modern/arrays/zipObject'
+mapValues = require 'lodash-node/modern/objects/mapValues'
+
 {Success, Failure} = require 'data.validation'
 
 # List [String, Validation] -> Validation Object
@@ -15,14 +18,7 @@ objectSequence = (nameValidationPairs) ->
   if failures.length > 0
     Failure failures
   else
-    Success pairsToObject result
-
-# List [String, Any] -> Object
-pairsToObject = (pairs) ->
-  result = {}
-  for [key, value] in pairs
-    result[key] = value
-  result
+    Success zipObject result
 
 # List Validation -> Validation List
 listSequence = (list) ->
