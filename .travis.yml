@@ -2,7 +2,9 @@ language: node_js
 node_js:
 - '0.10'
 before_install: npm install -g grunt-cli
-after_success: grunt travis
+after_success:
+- grunt travis
+- grunt compile
 deploy:
   provider: npm
   email: eevert.saukkokoski@appgyver.com
