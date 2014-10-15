@@ -167,6 +167,9 @@ describe "ag-types", ->
         notAProjectedString = projectToStringProperty totallyNotAString
         notAProjectedString.isFailure.should.be.true
 
+    it "Should have a default of Any for the property type", ->
+      types.projections.Property('anyProperty')('anything').get().should.deep.equal anyProperty: 'anything'
+
   it 'Should be able to define recursive composite types', ->
     listType = types.Object
       head: types.Any
