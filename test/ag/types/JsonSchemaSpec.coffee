@@ -1,6 +1,6 @@
 require('chai').should()
 
-json = require '../../../src/ag/types/json'
+{json} = require '../../../src/ag/types'
 
 describe "ag-types.json", ->
   it "should have a function for converting a schema to a type", ->
