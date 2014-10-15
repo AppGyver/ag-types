@@ -2,7 +2,7 @@ require('chai').should()
 
 types = require '../../../src/ag/types'
 
-describe "Typing data with steroids.data.types", ->
+describe "ag-types", ->
   it "Should have a String type", ->
     types.String.should.be.a 'function'
 
