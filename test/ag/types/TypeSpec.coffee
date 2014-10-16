@@ -3,6 +3,15 @@ require('chai').should()
 types = require '../../../src/ag/types'
 
 describe "ag-types", ->
+  describe "Any", ->
+    it "accepts any defined value", ->
+      for v in ['anything', 123, true]
+        types.Any(v).get().should.equal v
+
+    it "rejects undefined values", ->
+      for v in [null, undefined]
+        types.Any(v).isFailure.should.be.true
+
   it "Should have a String type", ->
     types.String.should.be.a 'function'
 
