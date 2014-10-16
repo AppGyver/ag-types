@@ -12,6 +12,11 @@ describe "ag-types", ->
       for v in [null, undefined]
         types.Any(v).isFailure.should.be.true
 
+  describe "Nothing", ->
+    it "accepts nothing", ->
+      for v in [null, undefined, 'anything', 123, true, {}, []]
+        types.Nothing(v).isFailure.should.be.true
+
   it "Should have a String type", ->
     types.String.should.be.a 'function'
 
