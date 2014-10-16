@@ -1,6 +1,6 @@
 {
   "name": "ag-types",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Arbitrary data structure validation",
   "main": "lib/ag/types.js",
   "scripts": {
