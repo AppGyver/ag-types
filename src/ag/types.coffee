@@ -6,6 +6,7 @@ module.exports = types = assign {
     Optional: require './types/optional'
     List: require './types/list'
     json: require './types/json'
+    Try: require './types/try'
   },
   require './types/primitives'
   require './types/objects'

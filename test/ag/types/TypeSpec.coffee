@@ -3,6 +3,19 @@ require('chai').should()
 types = require '../../../src/ag/types'
 
 describe "ag-types", ->
+  describe "Try", ->
+    it "accepts a function and returns a validator", ->
+      types.Try(->).should.be.a 'function'
+
+    it "should succeed with function output", ->
+      types.Try(-> 'value')('anything').get().should.equal 'value'
+
+    it "should pass validator input to function", ->
+      types.Try((v) -> v)('value').get().should.equal 'value'
+
+    it 'should reject if an error is thrown', ->
+      types.Try(-> throw new Error 'oops')('anything').isFailure.should.be.true
+
   describe "Any", ->
     it "accepts any defined value", ->
       for v in ['anything', 123, true]
