@@ -38,7 +38,7 @@ Construct a type validator by simply mirroring the structure of what you want.
     }
     RequestType(input)
 
-The resulting validator is a function that returns a [data.validation](https://github.com/folktale/data.validation).
+Your validator is a function that returns a [data.validation](https://github.com/folktale/data.validation).
 
 
 ### Continue off the validation result
