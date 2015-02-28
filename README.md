@@ -22,12 +22,12 @@ Examples in Coffeescript.
 ### Describe your type
 
 ```coffeescript
-    { Object, String, Optional, Map, Any } = require 'ag-types'
-    RequestType = Object {
-      url: String
-      method: String
-      params: Optional Map Any
-    }
+{ Object, String, Optional, Map, Any } = require 'ag-types'
+RequestType = Object {
+  url: String
+  method: String
+  params: Optional Map Any
+}
 ```
 
 Construct a type validator by simply mirroring the structure of what you want.
@@ -36,10 +36,10 @@ Construct a type validator by simply mirroring the structure of what you want.
 ### Validate input data against the type
 
 ```coffeescript
-    input = {
-      url: 'http://example.com'
-    }
-    RequestType(input)
+input = {
+  url: 'http://example.com'
+}
+RequestType(input)
 ```
 
 Your validator is a function that returns a [data.validation](https://github.com/folktale/data.validation).
@@ -48,10 +48,10 @@ Your validator is a function that returns a [data.validation](https://github.com
 ### Continue off the validation result
 
 ```coffeescript
-    RequestType(input).fold(
-      (errors) -> console.log "This doesn't look like a valid request: ", errors
-      (request) -> doRequest request
-    )
+RequestType(input).fold(
+  (errors) -> console.log "This doesn't look like a valid request: ", errors
+  (request) -> doRequest request
+)
 ```
 
 If an error occurs, the errors object will hold details of what went wrong. Otherwise you're good to go with the data.
