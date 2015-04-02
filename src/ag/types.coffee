@@ -1,6 +1,9 @@
 assign = require 'lodash-node/modern/objects/assign'
+{Success, Failure} = require 'data.validation'
 
 module.exports = types = assign {
+    data:
+      Validation: {Success, Failure}
     projections: require './types/projections'
     recursive: require './types/recursive'
     Optional: require './types/optional'
