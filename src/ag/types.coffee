@@ -1,4 +1,4 @@
-assign = require 'lodash-node/modern/objects/assign'
+assign = require 'lodash-node/modern/object/assign'
 {Success, Failure} = require 'data.validation'
 
 module.exports = types = assign {

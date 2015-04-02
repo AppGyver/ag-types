@@ -1,5 +1,5 @@
-mapValues = require 'lodash-node/modern/objects/mapValues'
-contains = require 'lodash-node/modern/collections/contains'
+mapValues = require 'lodash-node/modern/object/mapValues'
+contains = require 'lodash-node/modern/collection/contains'
 
 primitive = require './primitives'
 objects = require './objects'

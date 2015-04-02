@@ -1,6 +1,6 @@
-zipObject = require 'lodash-node/modern/arrays/zipObject'
-mapValues = require 'lodash-node/modern/objects/mapValues'
-pairs = require 'lodash-node/modern/objects/pairs'
+zipObject = require 'lodash-node/modern/array/zipObject'
+mapValues = require 'lodash-node/modern/object/mapValues'
+pairs = require 'lodash-node/modern/object/pairs'
 {Success, Failure} = require 'data.validation'
 
 assert = require '../assert'
