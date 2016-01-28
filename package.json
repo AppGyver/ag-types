@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/AppGyver/ag-types",
   "devDependencies": {
-    "chai": "^1.9.1",
+    "chai": "^3.5.0",
     "coffee-script": "^1.7.1",
     "grunt": "^0.4.5",
     "grunt-coffeelint": "0.0.10",
